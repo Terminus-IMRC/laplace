@@ -110,3 +110,15 @@ void field_random(long int turn)
 
 	return;
 }
+
+void field_square(long int turn)
+{
+	int i, j;
+	int f=turn%2;
+
+	for(i=1.0/4*M; i<3.0/4*M; i++)
+		for(j=1.0/4*N; j<3.0/4*N; j++)
+			field[f][i][j]=~0;
+	
+	return;
+}
