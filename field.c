@@ -29,8 +29,7 @@ void field_init()
 	for(i=0; i<2*(1+M+1); i++)
 		field_2dim[i]=field_1dim+(1+N+1)*i;
 	for(i=0; i<2; i++)
-		field[i]=field_2dim+i;
-		/*field[i]=field_2dim+(1+M+1)*(1+N+1)*i;*/
+		field[i]=field_2dim+(1+M+1)*i;
 
 	return;
 }
@@ -86,7 +85,7 @@ void field_output_png(long int turn)
 	}
 
 	png_init_io(png_ptr, fp);
-	png_set_IHDR(png_ptr, info_ptr, M, N, 8, PNG_COLOR_TYPE_GRAY, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+	png_set_IHDR(png_ptr, info_ptr, N, M, 8, PNG_COLOR_TYPE_GRAY, PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
 	png_set_compression_level(png_ptr, Z_NO_COMPRESSION);
 	png_write_info(png_ptr, info_ptr);
 	png_write_image(png_ptr, (png_bytepp)field_for_print);
@@ -105,8 +104,8 @@ void field_random(long int turn)
 	int i, j;
 	int f=turn%2;
 
-	for(i=0; i<M; i++)
-		for(j=0; j<N; j++)
+	for(i=1; i<1+M; i++)
+		for(j=1; j<1+N; j++)
 			field[f][i][j]=rand()%((int)((uint8_t)~0)+1);
 
 	return;
