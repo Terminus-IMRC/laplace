@@ -1,0 +1,6 @@
+*.c.d
+*.c.o
+laplace
+*.png
+.M
+.N
