@@ -104,6 +104,7 @@ void field_random(long int turn)
 	int i, j;
 	int f=turn%2;
 
+#pragma omp parallel for schedule(static) shared(field) private(i,j)
 	for(i=1; i<1+M; i++)
 		for(j=1; j<1+N; j++)
 			field[f][i][j]=rand()%((int)((uint8_t)~0)+1);
