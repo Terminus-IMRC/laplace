@@ -1,17 +1,21 @@
 PROG=laplace
 SRCS=main.c laplace.c field.c
 SRCS_MNDEP=laplace.c field.c
-TARGETS=all $(PROG) %.o %.d run line clean
-NONEED_DEP_TARGETS+=clean line
+TARGETS=all $(PROG) %.o %.d run line clean mpg
+NONEED_DEP_TARGETS+=clean line mpg
+FPS:=25
 
 OBJS=$(SRCS:%.c=%.c.o)
 OBJS_MNDEP=$(SRCS_MNDEP:%.c=%.c.o)
 DEPS=$(SRCS:%.c=%.c.d)
 ALLDEP=$(MAKEFILE_LIST_SANS_DEPS)
-TOCLEAN=out_*.png
+TOCLEAN=out_*.png out.mpg
 
 all: $(PROG)
 
+.PHONY: mpg
+mpg:
+	ffmpeg -y -v quiet -qscale 1 -r $(FPS) -i out_%d.png out.mpg
 
 EXTRA_TARGETS=$(filter-out $(TARGETS), $(MAKECMDGOALS))
 ifneq '$(EXTRA_TARGETS)' ''
