@@ -1,7 +1,7 @@
 *.c.d
 *.c.o
 laplace
-*.png
+out_*.png
 .M
 .N
 out.mpg
