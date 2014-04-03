@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>
+#include <math.h>
 
 	typedef uint8_t field_t;
 
@@ -20,5 +21,6 @@
 	extern void field_output_png(long int turn);
 	extern void field_random(long int turn);
 	extern void field_square(long int turn);
+	extern void field_circle(long int turn);
 
 #endif /* __FIELD_H_INSIDE__ */

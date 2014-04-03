@@ -6,6 +6,7 @@ int main()
 
 	field_random(turn);
 	field_square(turn);
+	field_circle(turn);
 
 	laplace();
 

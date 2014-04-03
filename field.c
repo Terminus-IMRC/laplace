@@ -122,3 +122,17 @@ void field_square(long int turn)
 	
 	return;
 }
+
+void field_circle(long int turn)
+{
+	int i, j, k;
+	int f=turn%2;
+
+	for(i=1; i<1+M; i++)
+		for(j=1; j<1+N; j++)
+			for(k=0; k<(M<N?M:N)/4; k++)
+				if(pow(i-(1+M+1)/2, 2)+pow(j-(1+N+1)/2, 2)<=pow(k, 2))
+					field[f][i][j]=(uint8_t)~0;
+
+	return;
+}
