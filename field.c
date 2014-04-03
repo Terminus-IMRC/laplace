@@ -128,6 +128,7 @@ void field_circle(long int turn)
 	int i, j, k;
 	int f=turn%2;
 
+#pragma omp parallel for schedule(static) shared(field) private(i,j,k)
 	for(i=1; i<1+M; i++)
 		for(j=1; j<1+N; j++)
 			for(k=0; k<(M<N?M:N)/4; k++)

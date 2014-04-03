@@ -38,7 +38,8 @@ CC:=cc
 HEADERFLAGS:=-I.
 OPTFLAGS:=-pipe -O0 -g
 WARNFLAGS:=-ansi -pedantic -Wall -Wextra -W -Wundef -Wshadow -Wcast-qual -Winline -Wno-long-long -fsigned-char
-LINKFLAGS+=-lpng
+ADDCFLAGS+=-fopenmp
+LINKFLAGS+=-lpng -fopenmp
 RM:=rm -r -f
 WC:=wc -c -l
 

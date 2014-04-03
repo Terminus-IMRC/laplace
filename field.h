@@ -1,6 +1,7 @@
 #ifndef __FIELD_H_INSIDE__
 #define __FIELD_H_INSIDE__
 
+#include <omp.h>
 #include <png.h>
 #include <stdint.h>
 #include <string.h>
