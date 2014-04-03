@@ -118,7 +118,7 @@ void field_square(long int turn)
 	int f=turn%2;
 
 #pragma omp parallel for schedule(static) shared(field) private(i,j)
-	for(i=1.0/4*M; i<3.0/4*M; i++)
+	for(i=(int)((1.0/4)*M); i<(int)((3.0/4)*M); i++)
 		for(j=1.0/4*N; j<3.0/4*N; j++)
 			field[f][i][j]=~0;
 	
