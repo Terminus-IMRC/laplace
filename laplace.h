@@ -1,6 +1,7 @@
 #ifndef __LAPLACE_H_INSIDE__
 #define __LAPLACE_H_INSIDE__
 
+#include <omp.h>
 #include <stdio.h>
 #include "field.h"
 
