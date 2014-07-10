@@ -3,6 +3,7 @@
 
 #include <omp.h>
 #include <stdio.h>
+#include <stddef.h>
 #include "field.h"
 
 	extern long int turn;

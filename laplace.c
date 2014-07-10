@@ -14,7 +14,7 @@ void laplace_init()
 void laplace()
 {
 	int i, j;
-	_Bool field_changed=1;
+	uint8_t field_changed=1;
 
 	for(; field_changed; turn++){
 		printf("turn: %ld\n", turn);
