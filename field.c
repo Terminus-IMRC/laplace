@@ -104,7 +104,7 @@ void field_random(long int turn)
 	int i, j;
 	int f=turn%2;
 
-#pragma omp parallel for schedule(static) shared(field) private(i,j)
+#pragma omp parallel for schedule(static) shared(field) private(i,j) collapse(2)
 	for(i=1; i<1+M; i++)
 		for(j=1; j<1+N; j++)
 			field[f][i][j]=rand()%((int)((uint8_t)~0)+1);
@@ -117,9 +117,9 @@ void field_square(long int turn)
 	int i, j;
 	int f=turn%2;
 
-#pragma omp parallel for schedule(static) shared(field) private(i,j)
+#pragma omp parallel for schedule(static) shared(field) private(i,j) collapse(2)
 	for(i=(int)((1.0/4)*M); i<(int)((3.0/4)*M); i++)
-		for(j=1.0/4*N; j<3.0/4*N; j++)
+		for(j=(int)(1.0/4*N); j<(int)(3.0/4*N); j++)
 			field[f][i][j]=~0;
 	
 	return;
@@ -130,7 +130,7 @@ void field_circle(long int turn)
 	int i, j, k;
 	int f=turn%2;
 
-#pragma omp parallel for schedule(static) shared(field) private(i,j,k)
+#pragma omp parallel for schedule(static) shared(field) private(i,j,k) collapse(3)
 	for(i=1; i<1+M; i++)
 		for(j=1; j<1+N; j++)
 			for(k=0; k<(M<N?M:N)/4; k++)
