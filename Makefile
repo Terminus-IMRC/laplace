@@ -1,5 +1,5 @@
 PROG=laplace
-SRCS=main.c laplace.c field.c
+SRCS=main.c laplace.c field.c ncpus.c
 SRCS_MNDEP=laplace.c field.c
 TARGETS=all $(PROG) %.o %.d run line clean mpg
 NONEED_DEP_TARGETS+=clean line mpg
@@ -38,8 +38,8 @@ CC:=cc
 HEADERFLAGS:=-I.
 OPTFLAGS:=-pipe -O0 -g
 WARNFLAGS:=-ansi -pedantic -Wall -Wextra -W -Wundef -Wshadow -Wcast-qual -Winline -Wno-long-long -fsigned-char
-ADDCFLAGS+=-fopenmp
-LINKFLAGS+=-lpng -fopenmp
+ADDCFLAGS+=-fopenmp -pthread
+LINKFLAGS+=-lpng -fopenmp -pthread -lm
 RM:=rm -r -f
 WC:=wc -c -l
 
