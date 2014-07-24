@@ -10,9 +10,9 @@ int main()
 
 	laplace_init();
 
-	field_random(turn);
+	/*field_random(turn);*/
 	field_square(turn);
-	field_circle(turn);
+	/*field_circle(turn);*/
 
 	thr=(pthread_t*)malloc(nthreads*sizeof(pthread_t));
 	assert(thr);
