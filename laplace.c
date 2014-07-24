@@ -72,7 +72,7 @@ void* laplace(void *arg)
 	for(;;){
 		if(tid==0){
 			printf("turn: %ld\n", turn);
-			field_output_png(turn);
+			/*field_output_png(turn);*/
 		}
 		fc=turn%2;
 		fn=(fc+1)%2;

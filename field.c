@@ -36,6 +36,7 @@ void field_init()
 
 void field_output_png(long int turn)
 {
+/*
 	int i, j;
 	field_t *field_for_print[M];
 	field_t *field_for_print_1dim;
@@ -95,7 +96,7 @@ void field_output_png(long int turn)
 	fclose(fp);
 
 	free(field_for_print_1dim);
-
+*/
 	return;
 }
 
