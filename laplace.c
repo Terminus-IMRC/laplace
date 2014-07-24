@@ -11,8 +11,15 @@ void laplace_init()
 	int i;
 	int e;
 	pthread_barrier_t *brr_1dim;
+	char *s;
 
-	nthreads=ncpus();
+	s=getenv("LAPLACE_NUM_THREADS");
+	if(s!=NULL){
+		nthreads=atoi(s);
+		if(nthreads<=0)
+			nthreads=ncpus();
+	}else
+		nthreads=ncpus();
 
 	printf("nthreads: %d\n", nthreads);
 
@@ -115,11 +122,11 @@ void* laplace(void *arg)
 		if(field_changed_g[0]==0)
 			break;
 		/*printf("%d/%d: not breaking\n", tid, nthreads);
-		fflush(stdout);
-		pthread_barrier_wait(&allbrr);*/
+		fflush(stdout);*/
+		pthread_barrier_wait(&allbrr);
 	}
-	if(tid==0)
-		field_output_png(turn);
+	/*if(tid==0)
+		field_output_png(turn);*/
 	/*printf("%d/%d: broke\n", tid, nthreads);
 		fflush(stdout);*/
 
