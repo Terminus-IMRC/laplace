@@ -90,39 +90,22 @@ void* laplace(void *arg)
 		/*if(tid==0){
 			printf("log2(%d)=%g, ceil(log2(%d))=%f, (int)ceil(log2(%d))=%d\n", nthreads, log(nthreads)/log(2), nthreads, ceil(log(nthreads)/log(2)), nthreads, (int)ceil(log(nthreads)/log(2)));
 		}*/
-		/*for(i=0; i<(int)ceil(log(nthreads)/log(2)); i++){*/
-		for(i=0; i<(int)ceil(log(nthreads)/log(2)); i++){
-			if(tid%(int)pow(2, i)!=0)
-				break;
-			if((int)(tid/pow(2, i))%2==0){
-				/*printf("%d/%d: i=%d: communicating with %d\n", tid, nthreads, i, (int)(tid+pow(2, i)));*/
-				if(tid+pow(2, i)>=nthreads)
-					continue;
-				pthread_barrier_wait(&(brr[tid/2][(int)(tid+pow(2, i))]));
-				field_changed_g[tid]=(field_changed_g[tid]!=0 || field_changed_g[(int)(tid+pow(2, i))]!=0)?1:0;
-			}else{
-				/*printf("%d/%d: i=%d: communicating with %d\n", tid, nthreads, i, (int)(tid-pow(2, i)));*/
-				pthread_barrier_wait(&(brr[(int)((tid-pow(2, i))/2)][tid]));
-			}
-		/*printf("%d/%d: performing sub-allbarrier\n", tid, nthreads);
-		fflush(stdout);
 		pthread_barrier_wait(&allbrr);
-		printf("%d/%d: sub-allbarrier done\n", tid, nthreads);
-		fflush(stdout);*/
+		if(tid==0){
+			for(i=0; i<nthreads; i++){
+				if(field_changed_g[i]!=0){
+					field_changed_g[0]=1;
+					break;
+				}
+			}
 		}
+		pthread_barrier_wait(&allbrr);
+		if(field_changed_g[0]==0)
+			break;
 
 		if(tid==0)
 			turn++;
 
-		/*printf("%d/%d: performing allbarrier\n", tid, nthreads);
-		fflush(stdout);*/
-		pthread_barrier_wait(&allbrr);
-		/*printf("%d/%d: barrier done\n", tid, nthreads);
-		fflush(stdout);*/
-		if(field_changed_g[0]==0)
-			break;
-		/*printf("%d/%d: not breaking\n", tid, nthreads);
-		fflush(stdout);*/
 		pthread_barrier_wait(&allbrr);
 	}
 	/*if(tid==0)
